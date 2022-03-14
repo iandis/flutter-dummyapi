@@ -1,6 +1,6 @@
 import 'package:http/http.dart';
 
-import 'auth_token_provider.dart';
+import 'secret_key_provider.dart';
 import 'request_type.dart';
 import 'rest_request.dart';
 import 'rest_request_interceptor.dart';
@@ -14,11 +14,11 @@ abstract class RESTClient {
     required RESTRequestInterceptor? interceptor,
   }) = _RESTClientImpl;
 
-  factory RESTClient.withAuthTokenProvider({
+  factory RESTClient.withSecretKeyProvider({
     required String baseUrl,
-    required AuthTokenProvider authTokenProvider,
+    required SecretKeyProvider secretKeyProvider,
     Client? client,
-  }) = _RESTClientImpl.withAuthTokenProvider;
+  }) = _RESTClientImpl.withSecretKeyProvider;
 
   Future<Response> createRequest(
     RequestType type,

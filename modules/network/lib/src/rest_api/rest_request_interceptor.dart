@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'auth_token_provider.dart';
+import 'secret_key_provider.dart';
 import 'rest_request.dart';
 
 abstract class RESTRequestInterceptor {
   const factory RESTRequestInterceptor.createWith({
-    required AuthTokenProvider authTokenProvider,
+    required SecretKeyProvider secretKeyProvider,
   }) = _DefaultRESTRequestInterceptor;
 
   FutureOr<RESTRequest> onRequest(RESTRequest current);
@@ -13,26 +13,26 @@ abstract class RESTRequestInterceptor {
 
 class _DefaultRESTRequestInterceptor implements RESTRequestInterceptor {
   const _DefaultRESTRequestInterceptor({
-    required AuthTokenProvider authTokenProvider,
-  }) : _authTokenProvider = authTokenProvider;
+    required SecretKeyProvider secretKeyProvider,
+  }) : _secretKeyProvider = secretKeyProvider;
 
-  final AuthTokenProvider _authTokenProvider;
+  final SecretKeyProvider _secretKeyProvider;
 
   @override
   Future<RESTRequest> onRequest(RESTRequest current) async {
-    final String? authToken = await _authTokenProvider.getToken();
+    final String? secretKey = await _secretKeyProvider.getSecretKey();
 
-    if (authToken == null) {
+    if (secretKey == null) {
       return current;
     }
 
     RESTRequest request = current;
 
     if (request.headers != null) {
-      request.headers!['app-id'] = authToken;
+      request.headers!['app-id'] = secretKey;
     } else {
       request = RESTRequest(
-        headers: <String, String>{'app-id': authToken},
+        headers: <String, String>{'app-id': secretKey},
         queryParameters: request.queryParameters,
         body: request.body,
       );

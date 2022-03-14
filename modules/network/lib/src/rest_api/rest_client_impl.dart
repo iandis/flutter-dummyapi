@@ -9,16 +9,16 @@ class _RESTClientImpl implements RESTClient {
         _httpClient = client,
         _interceptor = interceptor;
 
-  factory _RESTClientImpl.withAuthTokenProvider({
+  factory _RESTClientImpl.withSecretKeyProvider({
     required String baseUrl,
-    required AuthTokenProvider authTokenProvider,
+    required SecretKeyProvider secretKeyProvider,
     Client? client,
   }) {
     return _RESTClientImpl(
       baseUrl: baseUrl,
       client: client ?? Client(),
       interceptor: RESTRequestInterceptor.createWith(
-        authTokenProvider: authTokenProvider,
+        secretKeyProvider: secretKeyProvider,
       ),
     );
   }
