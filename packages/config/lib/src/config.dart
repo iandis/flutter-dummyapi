@@ -1,7 +1,10 @@
-abstract class Config {
-  const Config._();
+class Config {
+  const Config({
+    required this.baseUrl,
+    required this.apiSecretKey,
+  });
 
-  static const String baseUrl = 'BASE_URL';
+  final String baseUrl;
 
-  static const String apiSecretKey = 'API_SECRET_KEY';
+  final String apiSecretKey;
 }
