@@ -3,9 +3,13 @@ import 'dart:developer';
 
 import 'package:http/http.dart';
 import 'package:meta/meta.dart';
-import 'package:network/network.dart';
+
+import 'error/request_error.dart';
+import 'error/server_error.dart';
 
 abstract class RESTResponseParser<T extends Object?> {
+  const RESTResponseParser();
+
   static Exception convertErrorCodeToException({
     required int errorCode,
     required String responseBody,
