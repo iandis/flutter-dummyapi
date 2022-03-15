@@ -1,7 +1,5 @@
-import 'dart:convert';
 import 'dart:developer';
 
-import 'package:http/http.dart';
 import 'package:meta/meta.dart';
 
 import 'error/request_error.dart';
@@ -21,14 +19,6 @@ abstract class RESTResponseParser<T extends Object?> {
     return RequestError(responseBody: responseBody);
   }
 
-  static O parseJsonData<O, D>(
-    String jsonString,
-    O Function(D data) parserFn,
-  ) {
-    final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
-    return parserFn(jsonMap['data'] as D);
-  }
-
   @alwaysThrows
   Never onError(
     Exception exception,
@@ -43,5 +33,5 @@ abstract class RESTResponseParser<T extends Object?> {
     throw exception;
   }
 
-  T parse(Response httpResponse);
+  T parse(dynamic data);
 }

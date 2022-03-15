@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart';
 import 'package:meta/meta.dart';
 
@@ -5,6 +7,11 @@ import 'request_type.dart';
 import 'rest_client.dart';
 import 'rest_request.dart';
 import 'rest_response_parser.dart';
+
+dynamic _getDataFromJson(String responseBody) {
+  final Map<String, dynamic> jsonMap = jsonDecode(responseBody);
+  return jsonMap['data'];
+}
 
 abstract class RESTEndpoint<T extends Object?> {
   const RESTEndpoint({
@@ -38,7 +45,7 @@ abstract class RESTEndpoint<T extends Object?> {
       );
     }
 
-    return _parser.parse(response);
+    return _parser.parse(_getDataFromJson(response.body));
   }
 }
 
@@ -80,8 +87,7 @@ abstract class CancelableRESTEndpoint<T extends Object?>
         StackTrace.current,
       );
     }
-
-    return _parser.parse(response);
+    return _parser.parse(_getDataFromJson(response.body));
   }
 
   @nonVirtual
