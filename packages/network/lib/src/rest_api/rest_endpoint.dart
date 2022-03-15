@@ -28,10 +28,27 @@ abstract class RESTEndpoint<T extends Object?> {
 
   RequestType get requestType;
 
+  String _maybeReplaceVariablesInEndpoint(Map<String, String>? variables) {
+    if (variables?.isNotEmpty != true) {
+      return endpoint;
+    }
+
+    String endpointWithVariables = endpoint;
+
+    for (final String variableKey in variables!.keys) {
+      endpointWithVariables = endpointWithVariables.replaceAll(
+        '{$variableKey}',
+        variables[variableKey]!,
+      );
+    }
+
+    return endpointWithVariables;
+  }
+
   Future<T> execute(RESTRequest request) async {
     final Response response = await _restClient.createRequest(
       requestType,
-      endpoint,
+      _maybeReplaceVariablesInEndpoint(request.queryVariables),
       request,
     );
 
@@ -71,7 +88,7 @@ abstract class CancelableRESTEndpoint<T extends Object?>
 
     final Response response = await _restClient.createRequest(
       requestType,
-      endpoint,
+      _maybeReplaceVariablesInEndpoint(request.queryVariables),
       request,
       httpClient: _httpClient,
     );
