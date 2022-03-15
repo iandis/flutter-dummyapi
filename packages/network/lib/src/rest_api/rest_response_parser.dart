@@ -2,17 +2,32 @@ import 'dart:developer';
 
 import 'package:http/http.dart';
 import 'package:meta/meta.dart';
+import 'package:network/network.dart';
 
 abstract class RESTResponseParser<T extends Object?> {
+  static Exception convertErrorCodeToException({
+    required int errorCode,
+    required String responseBody,
+  }) {
+    if (errorCode >= 500 && errorCode <= 599) {
+      return ServerError(responseBody: responseBody);
+    }
+
+    return RequestError(responseBody: responseBody);
+  }
+
   @alwaysThrows
-  Never onError(Object error, StackTrace stackTrace) {
+  Never onError(
+    Exception exception,
+    StackTrace stackTrace,
+  ) {
     log(
       'An error occurred when requesting to server.',
       name: runtimeType.toString(),
-      error: error,
+      error: exception,
       stackTrace: stackTrace,
     );
-    throw error;
+    throw exception;
   }
 
   Future<T> parse(Response httpResponse);
