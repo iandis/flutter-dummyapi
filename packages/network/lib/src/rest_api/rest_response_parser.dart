@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:http/http.dart';
@@ -14,6 +15,14 @@ abstract class RESTResponseParser<T extends Object?> {
     }
 
     return RequestError(responseBody: responseBody);
+  }
+
+  static O parseJsonData<O, D>(
+    String jsonString,
+    O Function(D data) parserFn,
+  ) {
+    final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
+    return parserFn(jsonMap['data'] as D);
   }
 
   @alwaysThrows
