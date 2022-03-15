@@ -2,7 +2,7 @@ part of 'rest_client.dart';
 
 class _RESTClientImpl implements RESTClient {
   const _RESTClientImpl({
-    required String baseUrl,
+    required Uri baseUrl,
     required Client client,
     required RESTRequestInterceptor? interceptor,
   })  : _baseUrl = baseUrl,
@@ -15,7 +15,7 @@ class _RESTClientImpl implements RESTClient {
     Client? client,
   }) {
     return _RESTClientImpl(
-      baseUrl: baseUrl,
+      baseUrl: Uri.parse(baseUrl),
       client: client ?? Client(),
       interceptor: RESTRequestInterceptor.createWith(
         secretKeyProvider: secretKeyProvider,
@@ -23,7 +23,7 @@ class _RESTClientImpl implements RESTClient {
     );
   }
 
-  final String _baseUrl;
+  final Uri _baseUrl;
 
   final Client _httpClient;
 
@@ -42,9 +42,8 @@ class _RESTClientImpl implements RESTClient {
       request = await interceptor.onRequest(request);
     }
 
-    final Uri uri = Uri(
-      host: _baseUrl,
-      path: endpoint,
+    final Uri uri = _baseUrl.replace(
+      path: _baseUrl.path + endpoint,
       queryParameters: request.queryParameters,
     );
 

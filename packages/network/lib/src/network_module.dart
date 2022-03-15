@@ -12,14 +12,17 @@ void initNetworkModule(GetIt getIt) => $initGetIt(getIt);
 @module
 abstract class NetworkModule {
   @singleton
-  SecretKeyProvider get provideSecretKeyProvider {
-    return SecretKeyProvider.create(secretKey: Config.apiSecretKey);
+  SecretKeyProvider provideSecretKeyProvider(Config config) {
+    return SecretKeyProvider.create(secretKey: config.apiSecretKey);
   }
 
   @singleton
-  RESTClient provideRESTClient(SecretKeyProvider secretKeyProvider) {
+  RESTClient provideRESTClient(
+    Config config,
+    SecretKeyProvider secretKeyProvider,
+  ) {
     return RESTClient.withSecretKeyProvider(
-      baseUrl: Config.baseUrl,
+      baseUrl: config.baseUrl,
       secretKeyProvider: secretKeyProvider,
     );
   }

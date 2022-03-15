@@ -9,7 +9,7 @@ part 'rest_client_impl.dart';
 
 abstract class RESTClient {
   const factory RESTClient({
-    required String baseUrl,
+    required Uri baseUrl,
     required Client client,
     required RESTRequestInterceptor? interceptor,
   }) = _RESTClientImpl;
