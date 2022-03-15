@@ -1,7 +1,7 @@
 name: flutter_dummyapi
 
 packages:
-  - modules/**
+  - packages/**
   - "*"
 
 scripts:
