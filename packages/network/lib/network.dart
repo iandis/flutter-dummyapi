@@ -1,5 +1,6 @@
 library network;
 
+export 'package:http/http.dart' show Response;
 export 'src/network_module.dart' show initNetworkModule;
 export 'src/rest_api/error/request_error.dart';
 export 'src/rest_api/error/server_error.dart';
