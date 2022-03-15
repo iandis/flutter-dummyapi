@@ -39,5 +39,5 @@ abstract class RESTResponseParser<T extends Object?> {
     throw exception;
   }
 
-  Future<T> parse(Response httpResponse);
+  T parse(Response httpResponse);
 }
