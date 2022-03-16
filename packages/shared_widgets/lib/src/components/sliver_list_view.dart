@@ -35,7 +35,9 @@ class SliverListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       controller: controller,
-      physics: const BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(
+        parent: AlwaysScrollableScrollPhysics(),
+      ),
       slivers: <Widget>[
         _pullToRefreshOrEmpty,
         SliverToBoxAdapter(child: SizedBox(height: topPadding)),
