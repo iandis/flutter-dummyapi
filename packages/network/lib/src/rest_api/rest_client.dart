@@ -1,5 +1,7 @@
 import 'package:http/http.dart';
 
+import '../utils/network_utils.dart';
+import 'error/request_error.dart';
 import 'secret_key_provider.dart';
 import 'request_type.dart';
 import 'rest_request.dart';

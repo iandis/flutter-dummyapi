@@ -36,6 +36,9 @@ class _RESTClientImpl implements RESTClient {
     RESTRequest request, {
     Client? httpClient,
   }) async {
+    if (!(await NetworkUtils.isConnected)) {
+      throw RequestError.create(message: 'No connection');
+    }
     final RESTRequestInterceptor? interceptor = _interceptor;
 
     if (interceptor != null) {
