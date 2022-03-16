@@ -31,4 +31,9 @@ class RESTRequest {
   final Map<String, String>? queryVariables;
 
   final Map<String, dynamic>? body;
+
+  @override
+  String toString() {
+    return 'RESTRequest(headers: $headers, queryParameters: $queryParameters, queryVariables: $queryVariables, body: $body)';
+  }
 }

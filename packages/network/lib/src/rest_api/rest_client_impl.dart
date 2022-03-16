@@ -50,12 +50,26 @@ class _RESTClientImpl implements RESTClient {
       queryParameters: request.queryParameters,
     );
 
-    return _executeRequest(
+    log(
+      'A request to $uri was created with:\n'
+      '$request',
+      name: 'RESTClient',
+    );
+
+    final Response response = await _executeRequest(
       httpClient: httpClient ?? _httpClient,
       uri: uri,
       type: type,
       request: request,
     );
+
+    log(
+      'A request of $uri comes back with response of: \n'
+      '${response.body}',
+      name: 'RESTClient',
+    );
+
+    return response;
   }
 
   Future<Response> _executeRequest({
