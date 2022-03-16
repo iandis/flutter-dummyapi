@@ -10,7 +10,7 @@ import 'rest_response_parser.dart';
 
 dynamic _getDataFromJson(String responseBody) {
   final Map<String, dynamic> jsonMap = jsonDecode(responseBody);
-  return jsonMap['data'];
+  return jsonMap['data'] ?? jsonMap;
 }
 
 abstract class RESTEndpoint<T extends Object?> {
