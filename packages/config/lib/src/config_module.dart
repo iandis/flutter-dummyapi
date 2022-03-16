@@ -11,9 +11,9 @@ void initConfigModule(GetIt getIt) => $initGetIt(getIt);
 abstract class ConfigModule {
   @singleton
   Config get provideConfig {
-    return const Config(
-      baseUrl: 'BASE_URL',
-      apiSecretKey: 'API_SECRET_KEY',
+    return Config(
+      baseUrl: 'https://dummyapi.io/data/v1',
+      apiSecretKey: throw UnimplementedError('Please provide your app-id'),
     );
   }
 }
