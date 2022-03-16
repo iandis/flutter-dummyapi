@@ -20,23 +20,7 @@ class _PostItemHeader extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         children: <Widget>[
-          CircleAvatar(
-            minRadius: 20,
-            maxRadius: 21,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
-              child: CachedNetworkImage(
-                fit: BoxFit.cover,
-                height: 40,
-                width: 40,
-                imageUrl: user.imageUrl,
-                placeholder: (_, __) => const UserImagePlaceholder(),
-                errorWidget: (_, __, ___) {
-                  return const UserImagePlaceholder();
-                },
-              ),
-            ),
-          ),
+          UserCircleImage(imageUrl: user.imageUrl),
           const SizedBox(width: 10),
           Text(
             user.fullName,
