@@ -40,13 +40,16 @@ class UserListView extends StatelessWidget {
             ),
           )
         else
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (_, int index) {
-                final User user = state.users[index];
-                return UserListTile(user: user);
-              },
-              childCount: state.users.length,
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            sliver: SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (_, int index) {
+                  final User user = state.users[index];
+                  return UserListTile(user: user);
+                },
+                childCount: state.users.length,
+              ),
             ),
           ),
         // -- Bottom loading indicator

@@ -13,9 +13,31 @@ class UserListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: UserCircleImage(imageUrl: user.imageUrl),
-      title: Text(user.fullName),
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8.0),
+      padding: const EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+        border: Border.fromBorderSide(
+          BorderSide(
+            color: Theme.of(context).backgroundColor,
+          ),
+        ),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        color: Theme.of(context).backgroundColor.withAlpha(100),
+      ),
+      child: Row(
+        children: <Widget>[
+          UserCircleImage(imageUrl: user.imageUrl),
+          const SizedBox(width: 10.0),
+          Flexible(
+            child: Text(
+              user.fullName,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
