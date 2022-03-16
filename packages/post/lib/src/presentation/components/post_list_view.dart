@@ -24,18 +24,11 @@ class PostListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const Widget separator = SliverToBoxAdapter(child: SizedBox(height: 10));
-
-    return CustomScrollView(
+    return SliverListView(
       controller: controller,
-      physics: const BouncingScrollPhysics(),
+      canPullToRefresh: !(state.isLoading && state.posts.isEmpty),
+      onRefresh: onRefresh,
       slivers: <Widget>[
-        // -- Refresh indicator
-        if (!(state.isLoading && state.posts.isEmpty))
-          CupertinoSliverRefreshControl(onRefresh: onRefresh)
-        else
-          const SliverToBoxAdapter(),
-
         // -- Loading indicator / Empty lists / Lists
         if (state.isLoading && state.posts.isEmpty)
           const SliverFillRemaining(
@@ -78,7 +71,6 @@ class PostListView extends StatelessWidget {
               ),
             ),
           ),
-        separator,
       ],
     );
   }
