@@ -18,16 +18,18 @@ class UserCircleImage extends StatelessWidget {
       maxRadius: 21,
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(20)),
-        child: CachedNetworkImage(
-          fit: BoxFit.cover,
-          height: 40,
-          width: 40,
-          imageUrl: imageUrl,
-          placeholder: (_, __) => const UserImagePlaceholder(),
-          errorWidget: (_, __, ___) {
-            return const UserImagePlaceholder();
-          },
-        ),
+        child: imageUrl.isEmpty
+            ? const UserImagePlaceholder()
+            : CachedNetworkImage(
+                fit: BoxFit.cover,
+                height: 40,
+                width: 40,
+                imageUrl: imageUrl,
+                placeholder: (_, __) => const UserImagePlaceholder(),
+                errorWidget: (_, __, ___) {
+                  return const UserImagePlaceholder();
+                },
+              ),
       ),
     );
   }
