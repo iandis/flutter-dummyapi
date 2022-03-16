@@ -1,13 +1,5 @@
 part of 'post_item.dart';
 
-final Widget _userImagePlaceholder = ColoredBox(
-  color: Colors.grey[100]!,
-  child: const Icon(
-    Icons.person,
-    color: Colors.grey,
-  ),
-);
-
 /// This contains brief information about the user (image + url)
 class _PostItemHeader extends StatelessWidget {
   const _PostItemHeader({
@@ -38,9 +30,9 @@ class _PostItemHeader extends StatelessWidget {
                 height: 40,
                 width: 40,
                 imageUrl: user.imageUrl,
-                placeholder: (_, __) => _userImagePlaceholder,
+                placeholder: (_, __) => const UserImagePlaceholder(),
                 errorWidget: (_, __, ___) {
-                  return _userImagePlaceholder;
+                  return const UserImagePlaceholder();
                 },
               ),
             ),
