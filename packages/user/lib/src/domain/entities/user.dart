@@ -22,7 +22,7 @@ class User extends Equatable {
 
   final String lastName;
 
-  @JsonKey(name: 'picture')
+  @JsonKey(name: 'picture', defaultValue: '')
   final String imageUrl;
 
   String get fullName => '$firstName $lastName';

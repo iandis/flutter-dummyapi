@@ -23,6 +23,7 @@ class UserListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverListView(
       controller: controller,
+      topPadding: 10,
       canPullToRefresh: !(state.isLoading && state.users.isEmpty),
       onRefresh: onRefresh,
       slivers: <Widget>[

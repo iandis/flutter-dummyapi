@@ -40,13 +40,17 @@ class UserListByCreatedViewModel
     );
 
     try {
-      final UserListInput input = UserListInput.byCreated(page: nextPage);
+      const int limit = 20;
+      final UserListInput input = UserListInput.byCreated(
+        page: nextPage,
+        limit: limit,
+      );
       final List<User> users = await _doGetUserListByCreated(input);
       state = state.copyWith(
         currentPage: nextPage,
         status: ViewModelStatus.loaded,
         users: isMore ? state.users + users : users,
-        isAtEndOfPage: users.isEmpty,
+        isAtEndOfPage: users.isEmpty || users.length < limit,
       );
     } catch (error, stackTrace) {
       log(

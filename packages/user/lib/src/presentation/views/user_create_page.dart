@@ -30,6 +30,7 @@ class _UserCreatePageState extends State<UserCreatePage> {
       body: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(10, 40, 10, 10),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             TextFormField(
               initialValue: _userCreateViewModel.state.firstName,
